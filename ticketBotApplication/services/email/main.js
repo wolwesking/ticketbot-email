@@ -7,7 +7,7 @@ const generateRandomNumber = require("../idGenerator");
 const email = "justdev001@outlook.com";
 const password = "CSwR747o";
 
-const supportEmail = "takacspatrik993@gmaionl.com"; // Replace with the support's gmail
+const supportEmail = "takacspatrik993@gmail.com"; // Replace with the support's gmail
 
 const client = inbox.createConnection(993, "outlook.office365.com", {
   secureConnection: true,

@@ -4,8 +4,6 @@ let path = require('path');
 let cookieParser = require('cookie-parser');
 let logger = require('morgan');
 
-
-
 let app = express();
 
 // view engine setup
@@ -17,6 +15,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Watcher for email 1
+require('./services/email/watcher1');
+
+// Watcher for email 2
+require('./services/email/watcher2');
 
 // Routing
 let indexRouter = require('./routes/index');
