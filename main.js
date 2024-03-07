@@ -107,7 +107,7 @@ async function sendEmailWithAttachments(subject, content) {
     from: email,
     to:`${toEmail}, ${supportEmail}`,
     subject: `${parsedOriginalEmail.subject} - ID`,
-    text: `Original Sender: ${parsedOriginalEmail.from.text}\n\n${parsedOriginalEmail.text}`,
+    text: `Original Sender: ${parsedOriginalEmail.from.text}\n\n${parsedOriginalEmail.text}\nPlease use reply all!!`,
     attachments: parsedOriginalEmail.attachments,
   };
 
