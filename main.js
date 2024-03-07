@@ -96,18 +96,21 @@ async function sendEmailWithAttachments(subject, content) {
     },
   });
 
+  const parsedOriginalEmail = await simpleParser(content);
+
   const mailOptions = {
     from: email,
     to: `${recipientEmail1},${recipientEmail2}`,
-    subject: `Forwarded: ${subject}`,
-    text: `Original Email Content:\n${content}`,
+    subject: `Forwarded: ${parsedOriginalEmail.subject}`,
+    text: `Original Sender: ${parsedOriginalEmail.from.text}\n\n${parsedOriginalEmail.text}`,
+    attachments: parsedOriginalEmail.attachments,
   };
 
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
-      console.error("Error forwarding email:", error);
+      console.error('Error forwarding email:', error);
     } else {
-      console.log("Email forwarded:", info.response);
+      console.log('Email forwarded:', info.response);
     }
   });
 }
