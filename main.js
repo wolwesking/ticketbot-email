@@ -6,8 +6,7 @@ const nodemailer = require("nodemailer");
 const email = "justdev001@outlook.com";
 const password = "CSwR747o";
 
-const recipientEmail1 = "takacspatrik993@gmail.com"; // Replace with the first recipient's email
-const recipientEmail2 = "justdev001.email@gmail.com"; // Replace with the second recipient's email
+const supportEmail = "takacspatrik993@gmail.com"; // Replace with the first recipient's email
 
 const client = inbox.createConnection(993, "outlook.office365.com", {
   secureConnection: true,
@@ -29,28 +28,29 @@ client.on("connect", () => {
 
       // Start listening for new emails
       client.on("new", (message) => {
-        // Fetch the email content and subject using the message's UID
-        fetchEmailContentAndSubject(
-          message.UID,
-          (err, { content, subject }) => {
-            // Check for errors and output
-            if (err) {
-              console.error("Error fetching email content and subject:", err);
-            } else {
-              console.log("Subject:", subject);
-              console.log("Raw Email Content:", content);
-
-              // Check if it's a reply
-              if (!message.inReplyTo) {
+        // Check if it's a reply
+        if (!message.inReplyTo) {
+          // Fetch the email content and subject using the message's UID
+          fetchEmailContentAndSubject(
+            message.UID,
+            (err, { content, subject }) => {
+              // Check for errors and output
+              if (err) {
+                console.error("Error fetching email content and subject:", err);
+              } else {
+                console.log("Subject:", subject);
+                console.log("Raw Email Content:", content);
+      
                 // Send the email to two recipients with attachments
                 sendEmailWithAttachments(subject, content);
-              } else {
-                console.log("Email is a reply. Skipping forwarding.");
               }
             }
-          }
-        );
+          );
+        } else {
+          console.log("Email is a reply. Skipping forwarding.");
+        }
       });
+      
 
       // Enter idle mode to listen for updates
       client.idle();
@@ -98,10 +98,15 @@ async function sendEmailWithAttachments(subject, content) {
 
   const parsedOriginalEmail = await simpleParser(content);
 
+  // Extract client's email from the original email
+  const clientEmail = parsedOriginalEmail.from.text.match(/<([^>]+)>/);
+  const toEmail = clientEmail ? clientEmail[1] : ""; // Use client's email if found, otherwise empty string
+
+  // Set the 'to' field with the client's email
   const mailOptions = {
     from: email,
-    to: `${recipientEmail1},${recipientEmail2}`,
-    subject: `Forwarded: ${parsedOriginalEmail.subject}`,
+    to:`${toEmail}, ${supportEmail}`,
+    subject: `${parsedOriginalEmail.subject} - ID`,
     text: `Original Sender: ${parsedOriginalEmail.from.text}\n\n${parsedOriginalEmail.text}`,
     attachments: parsedOriginalEmail.attachments,
   };

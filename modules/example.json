@@ -1,0 +1,218 @@
+{
+  "headers": {},
+  "headerLines": [
+    {
+      "key": "received",
+      "line": "Received: from DB8PR09MB4075.eurprd09.prod.outlook.com (2603:10a6:10:12e::24)\r\n by AM6PR09MB2408.eurprd09.prod.outlook.com with HTTPS; Thu, 7 Mar 2024\r\n 08:01:01 +0000"
+    },
+    {
+      "key": "received",
+      "line": "Received: from MN2PR05CA0034.namprd05.prod.outlook.com (2603:10b6:208:c0::47)\r\n by DB8PR09MB4075.eurprd09.prod.outlook.com (2603:10a6:10:12e::24) with\r\n Microsoft SMTP Server (version=TLS1_2,\r\n cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7362.27; Thu, 7 Mar\r\n 2024 08:01:00 +0000"
+    },
+    {
+      "key": "received",
+      "line": "Received: from BL02EPF0001A0FE.namprd03.prod.outlook.com\r\n (2603:10b6:208:c0:cafe::33) by MN2PR05CA0034.outlook.office365.com\r\n (2603:10b6:208:c0::47) with Microsoft SMTP Server (version=TLS1_2,\r\n cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7386.6 via Frontend\r\n Transport; Thu, 7 Mar 2024 08:00:59 +0000"
+    },
+    {
+      "key": "authentication-results",
+      "line": "Authentication-Results: spf=pass (sender IP is 209.85.221.174)\r\n smtp.mailfrom=gmail.com; dkim=pass (signature was verified)\r\n header.d=gmail.com;dmarc=pass action=none header.from=gmail.com;compauth=pass\r\n reason=100"
+    },
+    {
+      "key": "received-spf",
+      "line": "Received-SPF: Pass (protection.outlook.com: domain of gmail.com designates\r\n 209.85.221.174 as permitted sender) receiver=protection.outlook.com;\r\n client-ip=209.85.221.174; helo=mail-vk1-f174.google.com; pr=C"
+    },
+    {
+      "key": "received",
+      "line": "Received: from mail-vk1-f174.google.com (209.85.221.174) by\r\n BL02EPF0001A0FE.mail.protection.outlook.com (10.167.242.105) with Microsoft\r\n SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id\r\n 15.20.7362.11 via Frontend Transport; Thu, 7 Mar 2024 08:00:59 +0000"
+    },
+    {
+      "key": "x-incomingtopheadermarker",
+      "line": "X-IncomingTopHeaderMarker:\r\n OriginalChecksum:E0CD28D5AACD03F7CEAE6BDC3DA57B34F1FD072C8947ADCAF389152D235F4CFD;UpperCasedChecksum:5E879000475EBAA595BAF7273A0F42765F0ABAEC6088356FEF55C926B965B69D;SizeAsReceived:2415;Count:13"
+    },
+    {
+      "key": "received",
+      "line": "Received: by mail-vk1-f174.google.com with SMTP id 71dfb90a1353d-4d34abf66deso39189e0c.1\r\n        for <justdev001@outlook.com>; Thu, 07 Mar 2024 00:00:59 -0800 (PST)"
+    },
+    {
+      "key": "dkim-signature",
+      "line": "DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;\r\n        d=gmail.com; s=20230601; t=1709798459; x=1710403259; darn=outlook.com;\r\n        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject\r\n         :date:message-id:reply-to;\r\n        bh=zsKEZzJfiBxrsRhvTnguIyVLaQJhh/xG11tHKdP7XZQ=;\r\n        b=hZJLkQ3EbmT9HCeB5BgHL2v23FaI3ztEHTz4tBd+dGDvsDYjNd+isX8/sCYXkl6z3a\r\n         gfhlgBLOWQHoFVODUCMKUsd2eDlJdB8VBtWExF6rD6NNwucWQnaUtddFaiVRePHpRsj7\r\n         OhN3SzaxPi4BPgZLba2GZcPbF+0dwqyaBdsCQ3x1/LfCSubiX8ocb0Drqq0TuHR3GEhd\r\n         VcnqJXNIKcjrSpMjoxduYRs8EhWDkGdb4D9Lkfntk2qT4rHG3K5hkofvlIzKAKYy+Idc\r\n         7b6uGLUF5OjAheRYM61R0s9V0J6zRM6QFMpoQhDm++7ec/b2sop/kt0PkBFlscqTHNls\r\n         I1Bw=="
+    },
+    {
+      "key": "x-google-dkim-signature",
+      "line": "X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;\r\n        d=1e100.net; s=20230601; t=1709798459; x=1710403259;\r\n        h=to:subject:message-id:date:from:mime-version:x-gm-message-state\r\n         :from:to:cc:subject:date:message-id:reply-to;\r\n        bh=zsKEZzJfiBxrsRhvTnguIyVLaQJhh/xG11tHKdP7XZQ=;\r\n        b=BaMsKgZMdrCeqjm78P85VUcskF8tFu9a/DiTeQV1ZWL5PFYNMp9F80w3vNFH5pSIjx\r\n         aKEfUAocQHz+ChbEip57bVnPN2CM8x3rAK8UH710/CxXjWac8VSXf6WDsWg1cQFzxofq\r\n         NI3Y0cir6oP5tbmfkTB2snm+ZMW8tubSAUs+ySUA46nkeG/JxCMBEb1iw2nTtElc5ric\r\n         grR9rZtQqs3FVgKLuySDGVI0iB+cIeKAYVybgtFGRnDCx+IOsBkpMr5Jm1A+kx0Mi8ho\r\n         Wd6Ym/8KvKsX1Nf2Z0XiWYiKQRHhWTz1g0BpmPcQPphrYCF7KICW8eLwMFwpgRQoj9Tm\r\n         obvw=="
+    },
+    {
+      "key": "x-gm-message-state",
+      "line": "X-Gm-Message-State: AOJu0Yw5DOLmpiIZa7BYfFtbdW48dH4voXhggf3wMVGu8MFpoKhpznYQ\r\n\tUMAeX9xjNKz+f7Hf916aUeUZY9Z/q4zxDavPjh1Amhrl3umQlOJMtz3E2LaeOL47S86bXBGEk/G\r\n\t7SsBoGppsXFHxRKoSZetAwIzT41mB7ZL8/lQYTc1dPoQ="
+    },
+    {
+      "key": "x-google-smtp-source",
+      "line": "X-Google-Smtp-Source: AGHT+IFqbR7znPRTyCVg258jXs8d0zhgS/a13iURmiz6UBMOVd+sXEACG5dQ+qbgajYxFV04bt1/gRpxHz/Gf0dda9w="
+    },
+    {
+      "key": "x-received",
+      "line": "X-Received: by 2002:a05:6122:290b:b0:4c0:1cc8:8821 with SMTP id\r\n fm11-20020a056122290b00b004c01cc88821mr8300086vkb.9.1709798458190; Thu, 07\r\n Mar 2024 00:00:58 -0800 (PST)"
+    },
+    {
+      "key": "from",
+      "line": "From: Patrik Takacs <takacspatrik993@gmail.com>"
+    },
+    { "key": "date", "line": "Date: Thu, 7 Mar 2024 13:00:46 +0500" },
+    {
+      "key": "message-id",
+      "line": "Message-ID: <CACKP0f8e7UCWeaiq9MxmDpNbnrBEiW--p1Z3Ox57OP5MHw=1Qw@mail.gmail.com>"
+    },
+    { "key": "subject", "line": "Subject: Hello world" },
+    { "key": "to", "line": "To: justdev001@outlook.com" },
+    {
+      "key": "content-type",
+      "line": "Content-Type: multipart/mixed; boundary=\"000000000000bd0bae06130d794e\""
+    },
+    { "key": "x-incomingheadercount", "line": "X-IncomingHeaderCount: 13" },
+    { "key": "return-path", "line": "Return-Path: takacspatrik993@gmail.com" },
+    {
+      "key": "x-ms-exchange-organization-expirationstarttime",
+      "line": "X-MS-Exchange-Organization-ExpirationStartTime: 07 Mar 2024 08:00:59.4530\r\n (UTC)"
+    },
+    {
+      "key": "x-ms-exchange-organization-expirationstarttimereason",
+      "line": "X-MS-Exchange-Organization-ExpirationStartTimeReason: OriginalSubmit"
+    },
+    {
+      "key": "x-ms-exchange-organization-expirationinterval",
+      "line": "X-MS-Exchange-Organization-ExpirationInterval: 1:00:00:00.0000000"
+    },
+    {
+      "key": "x-ms-exchange-organization-expirationintervalreason",
+      "line": "X-MS-Exchange-Organization-ExpirationIntervalReason: OriginalSubmit"
+    },
+    {
+      "key": "x-ms-exchange-organization-network-message-id",
+      "line": "X-MS-Exchange-Organization-Network-Message-Id:\r\n fb002e98-fd0c-4d58-50b7-08dc3e7cb9d7"
+    },
+    { "key": "x-eopattributedmessage", "line": "X-EOPAttributedMessage: 0" },
+    {
+      "key": "x-eoptenantattributedmessage",
+      "line": "X-EOPTenantAttributedMessage: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa:0"
+    },
+    {
+      "key": "x-ms-exchange-organization-messagedirectionality",
+      "line": "X-MS-Exchange-Organization-MessageDirectionality: Incoming"
+    },
+    {
+      "key": "x-ms-publictraffictype",
+      "line": "X-MS-PublicTrafficType: Email"
+    },
+    {
+      "key": "x-ms-traffictypediagnostic",
+      "line": "X-MS-TrafficTypeDiagnostic:\r\n BL02EPF0001A0FE:EE_|DB8PR09MB4075:EE_|AM6PR09MB2408:EE_"
+    },
+    {
+      "key": "x-ms-exchange-organization-authsource",
+      "line": "X-MS-Exchange-Organization-AuthSource:\r\n BL02EPF0001A0FE.namprd03.prod.outlook.com"
+    },
+    {
+      "key": "x-ms-exchange-organization-authas",
+      "line": "X-MS-Exchange-Organization-AuthAs: Anonymous"
+    },
+    {
+      "key": "x-ms-userlastlogontime",
+      "line": "X-MS-UserLastLogonTime: 3/7/2024 8:00:34 AM"
+    },
+    {
+      "key": "x-ms-office365-filtering-correlation-id",
+      "line": "X-MS-Office365-Filtering-Correlation-Id: fb002e98-fd0c-4d58-50b7-08dc3e7cb9d7"
+    },
+    {
+      "key": "x-ms-exchange-eopdirect",
+      "line": "X-MS-Exchange-EOPDirect: true"
+    },
+    { "key": "x-sender-ip", "line": "X-Sender-IP: 209.85.221.174" },
+    { "key": "x-sid-pra", "line": "X-SID-PRA: TAKACSPATRIK993@GMAIL.COM" },
+    { "key": "x-sid-result", "line": "X-SID-Result: PASS" },
+    {
+      "key": "x-ms-exchange-organization-pcl",
+      "line": "X-MS-Exchange-Organization-PCL: 2"
+    },
+    {
+      "key": "x-ms-exchange-organization-scl",
+      "line": "X-MS-Exchange-Organization-SCL: 1"
+    },
+    { "key": "x-microsoft-antispam", "line": "X-Microsoft-Antispam: BCL:0;" },
+    {
+      "key": "x-ms-exchange-crosstenant-originalarrivaltime",
+      "line": "X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Mar 2024 08:00:59.4217\r\n (UTC)"
+    },
+    {
+      "key": "x-ms-exchange-crosstenant-network-message-id",
+      "line": "X-MS-Exchange-CrossTenant-Network-Message-Id: fb002e98-fd0c-4d58-50b7-08dc3e7cb9d7"
+    },
+    {
+      "key": "x-ms-exchange-crosstenant-id",
+      "line": "X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa"
+    },
+    {
+      "key": "x-ms-exchange-crosstenant-authsource",
+      "line": "X-MS-Exchange-CrossTenant-AuthSource:\r\n BL02EPF0001A0FE.namprd03.prod.outlook.com"
+    },
+    {
+      "key": "x-ms-exchange-crosstenant-authas",
+      "line": "X-MS-Exchange-CrossTenant-AuthAs: Anonymous"
+    },
+    {
+      "key": "x-ms-exchange-crosstenant-fromentityheader",
+      "line": "X-MS-Exchange-CrossTenant-FromEntityHeader: Internet"
+    },
+    {
+      "key": "x-ms-exchange-crosstenant-rms-persistedconsumerorg",
+      "line": "X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg:\r\n 00000000-0000-0000-0000-000000000000"
+    },
+    {
+      "key": "x-ms-exchange-transport-crosstenantheadersstamped",
+      "line": "X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB8PR09MB4075"
+    },
+    {
+      "key": "x-ms-exchange-transport-endtoendlatency",
+      "line": "X-MS-Exchange-Transport-EndToEndLatency: 00:00:02.1250492"
+    },
+    {
+      "key": "x-ms-exchange-processed-by-bccfoldering",
+      "line": "X-MS-Exchange-Processed-By-BccFoldering: 15.20.7339.034"
+    },
+    {
+      "key": "x-microsoft-antispam-mailbox-delivery",
+      "line": "X-Microsoft-Antispam-Mailbox-Delivery:\r\n\tucf:0;jmr:0;ex:0;auth:1;dest:I;ENG:(5062000305)(920221119095)(90000117)(920221120095)(90013020)(91025020)(91040095)(9050020)(9060121)(9100341)(944500132)(4810010)(4910033)(9930004)(9545005)(10172021)(9320005)(120001);"
+    },
+    {
+      "key": "x-message-info",
+      "line": "X-Message-Info:\r\n\tqZelhIiYnPnU8tsnZU1cVWcPMP6o1mF7QnjhhAKgCLf8xJdZQWDTO2FezVp0fUvm9X5/gKsg9eaXO/z4FTnhFqX1yptFXqRYFlrGl5LF/exlf7UCCDf4dRFew2T+ZaCxDovi4lzrZOeOV3Gngk1L73eg8iArd+Kkg7A49ApiUvh9A53XmWJisBC6FhF03Zk0EjLljvoyQICW3wcvTtkrBg=="
+    },
+    {
+      "key": "x-message-delivery",
+      "line": "X-Message-Delivery: Vj0xLjE7dXM9MDtsPTA7YT0xO0Q9MTtHRD0xO1NDTD0tMQ=="
+    },
+    {
+      "key": "x-microsoft-antispam-message-info",
+      "line": "X-Microsoft-Antispam-Message-Info:\r\n\t=?utf-8?B?QnU4V3hYWmtRNXRGM0ROZHM2akU1QkhoeGNxbHF6b0I0MjZFME5VczFFMERM?=\r\n =?utf-8?B?U3poak9BZ3pjdnR1TWcvSFgwMTdJUDhPZFRWRG5ERkR6T3AvM1pYS20rNXhO?=\r\n =?utf-8?B?empjc1VzSjVxTXowU1FRYWo4MHgwQ29zVHZLSHV6Z1lzUmlZREVNc3ZOZ3g5?=\r\n =?utf-8?B?b0xzaU9JbUxwU0tyWmFNaWg5cDNnYmI5YlhlWFlUcDhBUWp0ajljaWcrTW5D?=\r\n =?utf-8?B?TVJmODJqcHBVUUkxbkVYSUNZZ0dMYnp4ZkpDanRqdGIzNzQ1Z1dCUjBkNHVz?=\r\n =?utf-8?B?dlhIQWZQY0gweDVXVmEvQXBSU05JaU5yMGs4ZnlsSVlIVnpYZ1Qxd1RtelBk?=\r\n =?utf-8?B?SEJ5bWlYRDRhM25IYjZyNGI5UXpmK3VvM0xzMmVmbTgyWm1OWGErMnUzMFEv?=\r\n =?utf-8?B?U091MXdUTzhTZHZLcElFQTNkVUNGRmEveXFRR3lxbWFpNkJ0eG5UQWs4Q3Ny?=\r\n =?utf-8?B?WkltSHlUNHFyb3BQQWJ5Q3lzM05YZ0ZzVXY2bXRLMEdZeGJTN3dBdFRScHdj?=\r\n =?utf-8?B?eS9FMzk0NEZ0Q3RDR1EyVmtSMjVsU0w3Q0lleHR2MXFkUndDM1ZOd3U0d2xT?=\r\n =?utf-8?B?WCtvc2RZRCtwV2ZFZ2s5b2xRVm40UUdCajNRemFaWVI0eWg1VTBsSVFwR3hx?=\r\n =?utf-8?B?ZlZKRlBDVXBaMFNnNTF3eS9oUXhWMnRrRHQ4UTdreXJDVGpOeDBvYXJKb3Iz?=\r\n =?utf-8?B?UU9ITFRrUUNLR1c2blkxbmJMbXpuelo0dFJkNlo1cGFpcnFpcEpSQlhuWk90?=\r\n =?utf-8?B?cnFJYXU1SVNYSXRUemRLYWdmK1J6RWdIR2J6R0g1OGREbGsvY2NZNVB6TXB0?=\r\n =?utf-8?B?RjY0YkJjVVFFOGdmaDE0WlEzYlNzZGtIQmlHdytQSWVRdndFYkFtNUpUOE83?=\r\n =?utf-8?B?aGtCd1RMZElpcFhHRUdTU1BGbzRsWVZqbkdpT2xLdUd5bE15NnIveE9WSTYz?=\r\n =?utf-8?B?RFNuSWdxTmpYSUlWak8yNkVjR0hQekl6SFhEU0xIa2ZpK25iSTlIZWpQZG0y?=\r\n =?utf-8?B?RWxTS2FScVlWVlhyTmp1NHByQlBiOGFPZk5VV1E5ME8vSGtBNDQ4Z1BZWEY0?=\r\n =?utf-8?B?NHVNQ3NVK0hVYmpDVVBPdis1L2xWSWZTeUI1UVBYRmNTT3EzZzYyY3pIVmg1?=\r\n =?utf-8?B?bnJRRk1JQ3RnU1VSMjhDZXI5b3V6dmE1MEs3djgrNHU2MndzcmIyZ3NMay9p?=\r\n =?utf-8?B?UytESk5RYTZ2ditkVXkycjN4Uk5EZzZMZ0xLUGhiRVRoV09MZktjRzFWakJS?=\r\n =?utf-8?B?UCthTUN2OUxZUXNJQ2xXQ1N2bzNhQ2NES0MyaVRrWkh1Sy9IaE5JZGM0V1Nn?=\r\n =?utf-8?B?ZElnaHM1UW5YZSszSjBDWFVBTU9aclJobUNYbHZuRkFUZE90WmxSL2dISlMw?=\r\n =?utf-8?B?ZWRMUUFGSUMxQ2VUdnBTQWl6TjY4TnlpcnJwT0FKOUFkd1kySHV5QklLUTUx?=\r\n =?utf-8?B?bkh4Q1poaFlsY0JUb0FOU1dDS3B0N1Y4MlVOaXFGRTNueWkvY2FPRDVzTzJE?=\r\n =?utf-8?B?Mk1GKzViRUIyZko5bTV6alpjWUg2eVI3WmNQTWdIUjh6ZUVIY2Q0Wncvb0Iz?=\r\n =?utf-8?B?R2hPL0k4THEvVWlvS1Z5SVMrZlpWZHJwcnNqa2VRUStvQnc5R21OTFhwSksy?=\r\n =?utf-8?B?cDFad1BYMHB0NXd0T2JNMXBETWMvYmpyYXR5TElWRmIzVUhJZTRoSUJvMU9N?=\r\n =?utf-8?B?YjhzZmYremJadFhkdnlkWkNUSFo3eWh6c0htWDRxakt2UzVnNHZsQkxoaG0r?=\r\n =?utf-8?B?eW9XZ1pTaDB3R0JSOG5WTUV4NTZiQW8zVmpkL0FSd042UmR0eTdWcVlJYXpz?=\r\n =?utf-8?B?MDlzd1NkNHZLVk5KdDVDLzJ0SkpwYWdTV3p4WWxIN1JWdVZtV1lNSHRmZmU1?=\r\n =?utf-8?B?NEk5Y1dEdUxhR0VpMENrN2l3OUhZMHlNQXpWaFlySFNvVHdYMXpmc2Q3eHky?=\r\n =?utf-8?B?K29ZS0J3U1NIdzN3dUR0bDJnZ0dVcllvU1JXOWR2KzhOMUN4bFcwUnd2TXFY?=\r\n =?utf-8?B?eGxqSzBRaFBBPT0=?="
+    },
+    { "key": "mime-version", "line": "MIME-Version: 1.0" }
+  ],
+  "html": "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"><div dir=\"ltr\">Test</div>\n",
+  "text": "Test\n",
+  "textAsHtml": "<p>Test</p>",
+  "subject": "Hello world",
+  "date": "2024-03-07T08:00:46.000Z",
+  "to": {
+    "value": [{ "address": "justdev001@outlook.com", "name": "" }],
+    "html": "<span class=\"mp_address_group\"><a href=\"mailto:justdev001@outlook.com\" class=\"mp_address_email\">justdev001@outlook.com</a></span>",
+    "text": "justdev001@outlook.com"
+  },
+  "from": {
+    "value": [
+      { "address": "takacspatrik993@gmail.com", "name": "Patrik Takacs" }
+    ],
+    "html": "<span class=\"mp_address_group\"><span class=\"mp_address_name\">Patrik Takacs</span> &lt;<a href=\"mailto:takacspatrik993@gmail.com\" class=\"mp_address_email\">takacspatrik993@gmail.com</a>&gt;</span>",
+    "text": "\"Patrik Takacs\" <takacspatrik993@gmail.com>"
+  },
+  "messageId": "<CACKP0f8e7UCWeaiq9MxmDpNbnrBEiW--p1Z3Ox57OP5MHw=1Qw@mail.gmail.com>"
+}
