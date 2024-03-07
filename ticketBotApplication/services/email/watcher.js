@@ -1,12 +1,13 @@
 const inbox = require("inbox");
 const { simpleParser } = require("mailparser");
 const nodemailer = require("nodemailer");
+const generateRandomNumber = require("../idGenerator");
 
 // Replace these values with your Outlook email credentials and server details
 const email = "justdev001@outlook.com";
 const password = "CSwR747o";
 
-const supportEmail = "takacspatrik993@gmail.com"; // Replace with the first recipient's email
+const supportEmail = "takacspatrik993@gmaionl.com"; // Replace with the support's gmail
 
 const client = inbox.createConnection(993, "outlook.office365.com", {
   secureConnection: true,
@@ -30,7 +31,7 @@ client.on("connect", () => {
       client.on("new", (message) => {
         // Check if it's a reply
         if (!message.inReplyTo) {
-          // Fetch the email content and subject using the message's UID
+          // Fetch the email content and subject using tWhe message's UID
           fetchEmailContentAndSubject(
             message.UID,
             (err, { content, subject }) => {
@@ -103,10 +104,11 @@ async function sendEmailWithAttachments(subject, content) {
   const toEmail = clientEmail ? clientEmail[1] : ""; // Use client's email if found, otherwise empty string
 
   // Set the 'to' field with the client's email
+  const idTicket = generateRandomNumber();
   const mailOptions = {
     from: email,
     to:`${toEmail}, ${supportEmail}`,
-    subject: `${parsedOriginalEmail.subject} - ID`,
+    subject: `${parsedOriginalEmail.subject} - [Ticket #: ${idTicket}]`,
     text: `Original Sender: ${parsedOriginalEmail.from.text}\n\n${parsedOriginalEmail.text}\nPlease use reply all!!`,
     attachments: parsedOriginalEmail.attachments,
   };
