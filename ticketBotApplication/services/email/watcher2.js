@@ -1,18 +1,22 @@
 const inbox = require("inbox");
 const { simpleParser } = require("mailparser");
 const nodemailer = require("nodemailer");
-const generateRandomNumber = require("../idGenerator");
+const path = require("path");
+const { PrismaClient } = require("@prisma/client");
 require("dotenv").config();
+const alreadyOpenedSameTicket = require("./already");
+const searchAndGenerateUniqueTicketId = require("../idGenerator");
 
 const email = process.env.EMAIL_2;
 const password = process.env.PASSWORD_2;
 const supportEmail = process.env.SUPPORT_EMAIL_2;
 const isEnabled = process.env.EMAIL2_ENABLED;
 
-// Replace these values with your Outlook email credentials and server details
-
 if (isEnabled === "true") {
+  const prisma = new PrismaClient();
+
   // Replace these values with your Outlook email credentials and server details
+
   const client = inbox.createConnection(993, "outlook.office365.com", {
     secureConnection: true,
     auth: { user: email, pass: password },
@@ -110,8 +114,22 @@ if (isEnabled === "true") {
     const clientEmail = parsedOriginalEmail.from.text.match(/<([^>]+)>/);
     const toEmail = clientEmail ? clientEmail[1] : ""; // Use client's email if found, otherwise empty string
 
+    // Check if the user has a ticket id with the same subject
+
+    const prevTickets = await prisma.tickets.findFirst({
+      where: {
+        AND: [{ email: toEmail }, { isClosed: false }, { subject: subject }],
+      },
+    });
+
+    console.log(JSON.stringify(prevTickets));
+    if (prevTickets) {
+      alreadyOpenedSameTicket(email, toEmail, subject, transporter);
+      return;
+    }
+
     // Set the 'to' field with the client's email
-    const idTicket = generateRandomNumber();
+    const idTicket = await searchAndGenerateUniqueTicketId();
     const pathLogo = path.join(__dirname, "logo.png");
     const mailOptions = {
       from: email,
@@ -151,5 +169,21 @@ if (isEnabled === "true") {
         console.log("Email forwarded:", info.response);
       }
     });
+
+    // Create ticket in the databse
+
+    const generatedTicket = await prisma.tickets.create({
+      data: {
+        date: new Date(),
+        email: toEmail,
+        isClosed: false,
+        message: parsedOriginalEmail.text,
+        name: parsedOriginalEmail.from.value[0].name,
+        subject: subject,
+        ticketId: idTicket,
+      },
+    });
+
+    console.log(generatedTicket);
   }
 }
