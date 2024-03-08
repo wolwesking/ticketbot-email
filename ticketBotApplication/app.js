@@ -24,10 +24,10 @@ require('./services/email/watcher2');
 
 // Routing
 let indexRouter = require('./routes/index');
-let usersRouter = require('./routes/users');
+let databaseRouter = require('./routes/database');
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/database', databaseRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
