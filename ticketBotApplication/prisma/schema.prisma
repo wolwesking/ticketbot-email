@@ -18,4 +18,5 @@ model Tickets {
   email       String
   message     String
   isClosed    Boolean
+  ticketId    Int @unique
 }

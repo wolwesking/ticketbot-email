@@ -12,6 +12,7 @@ const isEnabled = process.env.EMAIL2_ENABLED;
 // Replace these values with your Outlook email credentials and server details
 
 if (isEnabled === "true") {
+  // Replace these values with your Outlook email credentials and server details
   const client = inbox.createConnection(993, "outlook.office365.com", {
     secureConnection: true,
     auth: { user: email, pass: password },
@@ -91,6 +92,7 @@ if (isEnabled === "true") {
   }
 
   // Function to send an email with attachments
+
   async function sendEmailWithAttachments(subject, content) {
     const transporter = nodemailer.createTransport({
       host: "smtp.office365.com",
@@ -110,13 +112,37 @@ if (isEnabled === "true") {
 
     // Set the 'to' field with the client's email
     const idTicket = generateRandomNumber();
+    const pathLogo = path.join(__dirname, "logo.png");
     const mailOptions = {
       from: email,
       to: `${toEmail}, ${supportEmail}`,
       subject: `${parsedOriginalEmail.subject} - [Ticket #: ${idTicket}]`,
-      text: `Original Sender: ${parsedOriginalEmail.from.text}\n\n${parsedOriginalEmail.text}\nPlease use reply all!!`,
-      attachments: parsedOriginalEmail.attachments,
+      html: `
+      <img src="cid:image1" alt="Image" style="max-width: 100%;" /> <br/>
+      <h3>Please reply to this email using reply all</h3>
+      <p>Hello ${parsedOriginalEmail.from.value[0].name};
+      <h4>Re: ${subject}</h4>
+      <p>OsmoPrint | ${parsedOriginalEmail.date}</p>
+      <p>For your reference, here are your case details:</p>
+      <ul>
+      <li>Case #: ${idTicket}</li>
+      <li>Subject: ${subject}</li>
+      </ul>
+      <p>This message was sent to bilal@teznix.com in reference to Case #${idTicket}.</p>
+      <br>
+      <h4>Message sent to us:</h4>
+      <p>${parsedOriginalEmail.text}</p>
+      <p>Please reply to this email using reply all</p>`,
+      attachments: [
+        {
+          filename: "logo.png", // Set the filename for the image attachment
+          path: pathLogo, // Replace with the actual path to your image file
+          cid: "image1", // Set the Content-ID (CID) of the image attachment
+        },
+        ...parsedOriginalEmail.attachments, // Include other attachments from the original email
+      ],
     };
+    console.log(JSON.stringify(parsedOriginalEmail.from));
 
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {

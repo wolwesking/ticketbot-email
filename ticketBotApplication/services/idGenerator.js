@@ -1,35 +1,38 @@
+const { PrismaClient } = require("@prisma/client");
 
+async function searchAndGenerateUniqueTicketId() {
+  const prisma = new PrismaClient();
 
-function generateRandomNumber() {
-  let randomNumber = "";
-  for (let i = 0; i < 8; i++) {
-    const digit = Math.floor(Math.random() * 10); // Generates a random digit between 0 and 9
-    randomNumber += digit;
+  try {
+    // Get the latest ticket from the database
+    const latestTicket = await prisma.tickets.findFirst({
+      orderBy: {
+        ticketId: 'desc',
+      },
+    });
+
+    // Determine the starting point for the next ticket
+    let startingPoint = 7860000;
+    if (latestTicket) {
+      startingPoint = Math.max(latestTicket.ticketId + 1, startingPoint);
+    }
+
+    // Check if the generated number already exists
+    const existingTicket = await prisma.tickets.findUnique({
+      where: {
+        ticketId: startingPoint,
+      },
+    });
+
+    if (existingTicket) {
+      // If it already exists, generate a new one recursively
+      return await searchAndGenerateUniqueTicketId();
+    } else {
+      return startingPoint;
+    }
+  } finally {
+    await prisma.$disconnect();
   }
-  return parseInt(randomNumber);
 }
 
-
-// async function searchAndGenerateUniqueTicketId() {
-//   const prisma = new PrismaClient();
-
-//   try {
-//     const random8DigitNumber = generateRandomNumber();
-
-//     // Check if the generated number already exists
-//     const existingTicket = await prisma.tickets.findUnique({
-//       where: { ticketId: random8DigitNumber },
-//     });
-
-//     if (existingTicket) {
-//       // If it already exists, generate a new one recursively
-//       return await searchAndGenerateUniqueTicketId();
-//     } else {
-//       return random8DigitNumber;
-//     }
-//   } finally {
-//     await prisma.$disconnect();
-//   }
-// }
-
-module.exports = generateRandomNumber;
+module.exports = searchAndGenerateUniqueTicketId;
