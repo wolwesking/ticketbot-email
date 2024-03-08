@@ -20,60 +20,63 @@
     ></script>
   </head>
   <body>
-    <nav class="navbar navbar-expand navbar-light bg-light">
-      <ul class="nav navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link active" href="/" aria-current="page">Tickets</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/database">Database</a>
-        </li>
-      </ul>
-    </nav>
+    <div id="data">
+      <nav class="navbar navbar-expand navbar-light bg-light">
+        <ul class="nav navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" href="/" aria-current="page">Tickets</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/database">Database</a>
+          </li>
+        </ul>
+      </nav>
 
-    <h1 class="text-center">Tickets</h1>
-    <div class="table-responsive">
-      <div class="container">
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">Ticket #</th>
-              <th scope="col">Full name</th>
-              <th scope="col">Email</th>
-              <th scope="col">Date</th>
-              <th scope="col">Subject</th>
-              <th scope="col">TicketStatus</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% if (data.length === 0) { %>
-            <tr>
-              <td><p class="badge bg-success text-light">No open tickets</p></td>
-            </tr>
-            <% } %>
-            <% data.forEach(element => { %>
-            <tr class="">
-              <td scope="row"><%=element.ticketId%></td>
-              <td scope="row"><%=element.name%></td>
-              <td scope="row"><%=element.email%></td>
-              <td scope="row">
-                <%= (new Date(element.date)).toLocaleDateString('en-US', { day:
-                'numeric', month: 'short', year: 'numeric' }) %>
-              </td>
-              <td scope="row"><%=element.subject%></td>
-              <td scope="row">
-                <button
-                  type="button"
-                  class="btn bg-warning"
-                  onclick="closeTicket('<%=element.id%>')"
-                >
-                  Open
-                </button>
-              </td>
-            </tr>
-            <% }) %>
-          </tbody>
-        </table>
+      <h1 class="text-center">Tickets</h1>
+      <div class="table-responsive">
+        <div class="container">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Ticket #</th>
+                <th scope="col">Full name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Date</th>
+                <th scope="col">Subject</th>
+                <th scope="col">TicketStatus</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% if (data.length === 0) { %>
+              <tr>
+                <td>
+                  <p class="badge bg-success text-light">No open tickets</p>
+                </td>
+              </tr>
+              <% } %> <% data.forEach(element => { %>
+              <tr class="">
+                <td scope="row"><%=element.ticketId%></td>
+                <td scope="row"><%=element.name%></td>
+                <td scope="row"><%=element.email%></td>
+                <td scope="row">
+                  <%= (new Date(element.date)).toLocaleDateString('en-US', {
+                  day: 'numeric', month: 'short', year: 'numeric' }) %>
+                </td>
+                <td scope="row"><%=element.subject%></td>
+                <td scope="row">
+                  <button
+                    type="button"
+                    class="btn bg-warning"
+                    onclick="closeTicket('<%=element.id%>')"
+                  >
+                    Open
+                  </button>
+                </td>
+              </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </body>
@@ -86,6 +89,25 @@
         },
         body: JSON.stringify({ ticketId }),
       });
+    }
+
+    const enteredPassword = prompt("Enter your password:");
+
+    // Check if the entered password matches "Pass"
+    if (enteredPassword === "Pass") {
+      alert("Login successful!");
+      showTicketsTable(); // Show the table after successful login
+    } else {
+      alert("Incorrect password. Login failed.");
+      hideTicketsTable(); // Hide the table after unsuccessful login
+    }
+
+    function showTicketsTable() {
+      document.getElementById("data").style.display = "block";
+    }
+
+    function hideTicketsTable() {
+      document.getElementById("data").style.display = "none";
     }
   </script>
 </html>

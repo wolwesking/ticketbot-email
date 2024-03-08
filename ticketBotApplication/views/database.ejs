@@ -20,60 +20,66 @@
     ></script>
   </head>
   <body>
-    <nav class="navbar navbar-expand navbar-light bg-light">
-      <ul class="nav navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" href="/" aria-current="page">Tickets</a>
-        </li>
-        <li class="nav-item active">
-          <a class="nav-link" href="/database">Database</a>
-        </li>
-      </ul>
-    </nav>
-    <div class="container">
-      <div class="row justify-content-center align-items-center g-2 my-5">
-        <div class="col">
-          <button type="button" class="btn btn-primary" onclick="downloadDB()">
-            Download database
-          </button>
+    <div id="data">
+      <nav class="navbar navbar-expand navbar-light bg-light">
+        <ul class="nav navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="/" aria-current="page">Tickets</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/database">Database</a>
+          </li>
+        </ul>
+      </nav>
+      <div class="container">
+        <div class="row justify-content-center align-items-center g-2 my-5">
+          <div class="col">
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="downloadDB()"
+            >
+              Download database
+            </button>
+          </div>
         </div>
       </div>
-    </div>
-    <br />
-    <div class="table-responsive px-5">
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Subject</th>
-            <th scope="col">Name</th>
-            <th scope="col">Date</th>
-            <th scope="col">Email</th>
-            <th scope="col">Message</th>
-            <th scope="col">Status</th>
-            <th scope="col">TicketId</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% data.forEach(element => { %>
-          <tr class="">
-            <td scope="row"><%=element.id%></td>
-            <td scope="row"><%=element.subject%></td>
-            <td scope="row"><%=element.name%></td>
-            <td scope="row"><%=element.date%></td>
-            <td scope="row"><%=element.email%></td>
-            <td scope="row"><%=element.message%></td>
-            <td scope="row">
-              <span
-                class="badge <%=element.isClosed ? 'bg-warning' : 'bg-success'%>"
-                ><%=element.isClosed ? 'Closed' : 'Open'%></span
-              >
-            </td>
-            <td scope="row"><%=element.ticketId%></td>
-          </tr>
-          <% }) %>
-        </tbody>
-      </table>
+      <br />
+      <div class="table-responsive px-5">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Id</th>
+              <th scope="col">Subject</th>
+              <th scope="col">Name</th>
+              <th scope="col">Date</th>
+              <th scope="col">Email</th>
+              <th scope="col">Message</th>
+              <th scope="col">Status</th>
+              <th scope="col">TicketId</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% data.forEach(element => { %>
+            <tr class="">
+              <td scope="row"><%=element.id%></td>
+              <td scope="row"><%=element.subject%></td>
+              <td scope="row"><%=element.name%></td>
+              <td scope="row"><%=element.date%></td>
+              <td scope="row"><%=element.email%></td>
+              <td scope="row"><%=element.message%></td>
+              <td scope="row">
+                <span
+                  class="badge <%=element.isClosed ? 'bg-warning' : 'bg-success'%>"
+                  ><%=element.isClosed ? 'Closed' : 'Open'%></span
+                >
+              </td>
+              <td scope="row"><%=element.ticketId%></td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
     </div>
   </body>
   <script>
@@ -110,6 +116,24 @@
         .catch((error) => {
           console.error("Error downloading database:", error);
         });
+    }
+    const enteredPassword = prompt("Enter your password:");
+
+    // Check if the entered password matches "Pass"
+    if (enteredPassword === "Pass") {
+      alert("Login successful!");
+      showTicketsTable(); // Show the table after successful login
+    } else {
+      alert("Incorrect password. Login failed.");
+      hideTicketsTable(); // Hide the table after unsuccessful login
+    }
+
+    function showTicketsTable() {
+      document.getElementById("data").style.display = "block";
+    }
+
+    function hideTicketsTable() {
+      document.getElementById("data").style.display = "none";
     }
   </script>
 </html>
