@@ -6,6 +6,7 @@ const path = require("path");
 const { PrismaClient } = require("@prisma/client");
 const alreadyOpenedSameTicket = require("./already");
 const searchAndGenerateUniqueTicketId = require("../idGenerator");
+require('dotenv').config();
 
 const inboxEmail = "justdev001@outlook.com";
 const inboxPassword = "CSwR747o";

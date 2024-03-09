@@ -6,7 +6,7 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
 // Define a username and password for basic authentication
-const users = { "admin": "Pass" };
+const users = {"teznix":"1234"};
 
 // Middleware for basic authentication
 const authMiddleware = basicAuth({
