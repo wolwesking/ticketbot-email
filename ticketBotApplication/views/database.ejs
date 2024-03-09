@@ -117,16 +117,6 @@
           console.error("Error downloading database:", error);
         });
     }
-    const enteredPassword = prompt("Enter your password:");
-
-    // Check if the entered password matches "Pass"
-    if (enteredPassword === "Pass") {
-      alert("Login successful!");
-      showTicketsTable(); // Show the table after successful login
-    } else {
-      alert("Incorrect password. Login failed.");
-      hideTicketsTable(); // Hide the table after unsuccessful login
-    }
 
     function showTicketsTable() {
       document.getElementById("data").style.display = "block";

@@ -100,11 +100,12 @@ client.on("connect", () => {
                     console.log(err);
                   }
                   const pathLogo = path.join(__dirname, "logo.png");
+                  const newSubject = `${parsedOriginalEmail.subject} - [Ticket #: ${idTicket}]`
                   // EmailFor
                   const EmailForCleint = {
                     from: NoReplyEmail,
                     to: `${toEmail}`,
-                    subject: `${parsedOriginalEmail.subject} - [Ticket #: ${idTicket}]`,
+                    subject: newSubject,
                     html: `
                       <img src="cid:image1" alt="Image" style="max-width: 100%;" /> <br/>
                       <h3>Please do not reply to this email, this mailbox is not monitored</h3>
@@ -131,7 +132,7 @@ client.on("connect", () => {
                     ],
                   };
 
-                  const replySubject = replySubjectFormater(subject);
+                  const replySubject = replySubjectFormater(newSubject);
 
                   const EmailForSupport = {
                     from: NoReplyEmail,

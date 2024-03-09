@@ -1,11 +1,23 @@
 const { PrismaClient } = require("@prisma/client");
-let express = require("express");
-let router = express.Router();
+const express = require("express");
+const basicAuth = require("express-basic-auth");
 
 const prisma = new PrismaClient();
 
+// Define a username and password for basic authentication
+const users = { "admin": "Pass" };
+
+// Middleware for basic authentication
+const authMiddleware = basicAuth({
+  users,
+  challenge: true, // Send authentication challenge if credentials are missing
+  unauthorizedResponse: "Unauthorized",
+});
+
+const router = express.Router();
+
 /* GET users listing. */
-router.get("/", async function (req, res, next) {
+router.get("/", authMiddleware, async function (req, res, next) {
   let dbData;
   try {
     dbData = await prisma.tickets.findMany();
@@ -18,7 +30,7 @@ router.get("/", async function (req, res, next) {
   }
 });
 
-router.post("/", async function (req, res, next) {
+router.post("/", authMiddleware, async function (req, res, next) {
   try {
     // Fetch data from the database
     const dbData = await prisma.tickets.findMany();
