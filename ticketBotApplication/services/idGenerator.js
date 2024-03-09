@@ -30,8 +30,10 @@ async function searchAndGenerateUniqueTicketId() {
     } else {
       return startingPoint;
     }
-  } finally {
-    await prisma.$disconnect();
+  }
+  catch (err)
+  {
+    console.error(err);
   }
 }
 

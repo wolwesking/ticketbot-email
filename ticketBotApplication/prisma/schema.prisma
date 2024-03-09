@@ -10,7 +10,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Tickets {
+model tickets {
   id          Int @id @default(autoincrement())
   subject     String
   name        String

@@ -17,10 +17,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Watcher for email 1
-require('./services/email/watcher1');
+require('./services/email/index');
 
-// Watcher for email 2
-require('./services/email/watcher2');
 
 // Routing
 let indexRouter = require('./routes/index');
