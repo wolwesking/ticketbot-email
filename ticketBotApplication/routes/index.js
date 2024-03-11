@@ -1,20 +1,13 @@
 let express = require("express");
 let router = express.Router();
-const basicAuth = require("express-basic-auth");
 const { PrismaClient } = require("@prisma/client");
+const authMiddleware = require('../services/auth');
 
 const prisma = new PrismaClient();
 
 // Define a username and password for basic authentication
-const users = {"teznix":"1234"};
 
 // Middleware for basic authentication
-const authMiddleware = basicAuth({
-  users,
-  challenge: true, // Send authentication challenge if credentials are missing
-  unauthorizedResponse: "Unauthorized",
-});
-
 /* GET home page. */
 router.get("/", authMiddleware, async function (req, res, next) {
   let dataFromDB;

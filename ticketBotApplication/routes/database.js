@@ -1,18 +1,9 @@
 const { PrismaClient } = require("@prisma/client");
 const express = require("express");
-const basicAuth = require("express-basic-auth");
+const authMiddleware = require('../services/auth');
+
 
 const prisma = new PrismaClient();
-
-// Define a username and password for basic authentication
-const users = { "admin": "Pass" };
-
-// Middleware for basic authentication
-const authMiddleware = basicAuth({
-  users,
-  challenge: true, // Send authentication challenge if credentials are missing
-  unauthorizedResponse: "Unauthorized",
-});
 
 const router = express.Router();
 
